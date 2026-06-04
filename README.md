@@ -4,7 +4,7 @@ AI/ML engineer based in Bangalore. I build agentic systems,
 RAG pipelines, and open-source developer tooling.
 IEEE-published. Graduated 2025 — always building something.
 
-→ ripunjay.vercel.app
+→ [ripunjay.vercel.app](https://ripunjay.vercel.app)
 
 ---
 
