@@ -17,7 +17,7 @@ IEEE-published. Graduated 2025 — always building something.
 **ML & AI**
 
 [![My Skills](https://skillicons.dev/icons?i=pytorch,tensorflow&theme=dark)](https://skillicons.dev)
-![XGBoost](https://img.shields.io/badge/XGBoost-189fdd?style=flat-square&logo=xgboost&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-black?style=flat-square)
 ![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=flat-square&logo=huggingface&logoColor=black)
 ![LAION CLAP](https://img.shields.io/badge/LAION_CLAP-black?style=flat-square)
 ![Librosa](https://img.shields.io/badge/Librosa-black?style=flat-square)
@@ -27,23 +27,27 @@ IEEE-published. Graduated 2025 — always building something.
 ![LangGraph](https://img.shields.io/badge/LangGraph-black?style=flat-square)
 ![LangChain](https://img.shields.io/badge/LangChain-black?style=flat-square)
 ![FastMCP](https://img.shields.io/badge/FastMCP-black?style=flat-square)
-![Claude Code](https://img.shields.io/badge/Claude_Code-D97757?style=flat-square&logo=anthropic&logoColor=white)
-![Gemini](https://img.shields.io/badge/Gemini_CLI-8E75B2?style=flat-square&logo=google&logoColor=white)
-![antigravity](https://img.shields.io/badge/antigravity_CLI-black?style=flat-square)
-![Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=flat-square&logo=google&logoColor=white)
-![Groq](https://img.shields.io/badge/Groq-F55036?style=flat-square)
+![Groq](https://img.shields.io/badge/Groq-black?style=flat-square)
 ![Llama](https://img.shields.io/badge/Llama_3.3-0467DF?style=flat-square&logo=meta&logoColor=white)
+![Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=flat-square&logo=google&logoColor=white)
+
+**AI Dev Tools**
+
+![Claude Code](https://img.shields.io/badge/Claude_Code-D97757?style=flat-square&logo=anthropic&logoColor=white)
+![Gemini CLI](https://img.shields.io/badge/Gemini_CLI-8E75B2?style=flat-square&logo=google&logoColor=white)
+![antigravity](https://img.shields.io/badge/antigravity_CLI-black?style=flat-square)
 
 **RAG & Observability**
 
-![Qdrant](https://img.shields.io/badge/Qdrant-DC244C?style=flat-square)
+![Qdrant](https://img.shields.io/badge/Qdrant-black?style=flat-square)
 ![ChromaDB](https://img.shields.io/badge/ChromaDB-black?style=flat-square)
 ![RAGAS](https://img.shields.io/badge/RAGAS-black?style=flat-square)
 ![LangSmith](https://img.shields.io/badge/LangSmith-black?style=flat-square)
 
 **Backend & MLOps**
 
-[![My Skills](https://skillicons.dev/icons?i=fastapi,flask,pydantic&theme=dark)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=fastapi,flask&theme=dark)](https://skillicons.dev)
+![Pydantic](https://img.shields.io/badge/Pydantic-black?style=flat-square)
 ![Modal](https://img.shields.io/badge/Modal-black?style=flat-square)
 
 **Frontend**
