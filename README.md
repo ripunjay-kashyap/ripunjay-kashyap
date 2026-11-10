@@ -2,7 +2,7 @@
 
 <p align="center">
 <b>AI & backend engineer · Bangalore</b><br>
-I build AI systems where the model is the least trusted part of the stack.
+I build AI systems where the LLM never produces the numbers.
 </p>
 
 <p align="center">
@@ -14,24 +14,22 @@ I build AI systems where the model is the least trusted part of the stack.
 
 ---
 
-## the trust boundary
+## who does what
 
-Every system I build draws one line: what the model may touch, and what it never gets near.
-
-| | the model is allowed to | code is in charge of | how you can check it |
+| | LLM | code | proof |
 |:--|:--|:--|:--|
-| **SoundReverse** | explain the mastering decisions | every EQ, compression and gain value | public LangSmith trace |
-| **MIMIC** | decide what a persona tries next | which elements actually exist on the page | a screenshot + browser event per finding |
-| **Zenic** | phrase the answer | retrieval, calorie math, saying "I don't know" | cited passages · RAGAS 0.937 |
-| **Audio Sonic MCP** | nothing. no LLM in the loop | tempo, key, stems, embeddings | `bpm_engine` on every payload |
-| **SHPSv2** | nothing. no LLM in the loop | remaining-useful-life estimates | SHAP attribution per estimate |
+| **SoundReverse** | writes the explanation | every EQ, compression and gain value | public LangSmith trace |
+| **MIMIC** | picks each persona's next action | limits actions to elements on the page | screenshot + browser event per finding |
+| **Zenic** | writes the answer | retrieval, calorie math, the "I don't know" fallback | cited passages · RAGAS 0.937 |
+| **Audio Sonic MCP** | none | tempo, key, stems, embeddings | `bpm_engine` on every payload |
+| **SHPSv2** | none | remaining-useful-life estimates | SHAP attribution per estimate |
 
 ---
 
 ## builds
 
 ### SoundReverse
-**a finished track goes in. the mastering session that made it comes out.**
+**Estimates the EQ, compression and gain settings used to master a track.**
 
 ![](https://img.shields.io/badge/stems-4-FF5A1F?style=flat-square&labelColor=111111)
 ![](https://img.shields.io/badge/critic_checks-4-FF5A1F?style=flat-square&labelColor=111111)
@@ -55,7 +53,7 @@ A LangGraph multi-agent pipeline. The LLM writes only the reasoning. Every frequ
 </details>
 
 ### MIMIC
-**six AI users try your site at once and file bug reports with proof.**
+**Six AI personas test a website in parallel and report where they got stuck, with screenshots.**
 
 ![](https://img.shields.io/badge/personas-6-FF5A1F?style=flat-square&labelColor=111111)
 ![](https://img.shields.io/badge/runs-parallel-FF5A1F?style=flat-square&labelColor=111111)
@@ -66,13 +64,13 @@ A LangGraph multi-agent pipeline. The LLM writes only the reasoning. Every frequ
 <summary><b>how it works</b></summary>
 <br>
 
-Each persona walks the same flow (home → details → OTP → confirmed) in its own browser. Personas can only interact with elements that really exist on the page, so they can't invent a bug. Anything they report is tied to the screenshot and the browser event where it happened.
+Each persona walks the same flow (home → details → OTP → confirmed) in its own browser. Personas can only interact with elements that really exist on the page, and each reported issue links to its screenshot and browser event.
 
 `LangGraph` `Playwright` `FastAPI`
 </details>
 
 ### Audio Sonic MCP
-**gives an AI agent ears: any song in, a structured sonic signature out. fully offline.**
+**An MCP server that pulls tempo, key, stems and a CLAP embedding from any song. Runs offline.**
 
 ![](https://img.shields.io/badge/MCP_tools-4-FF5A1F?style=flat-square&labelColor=111111)
 ![](https://img.shields.io/badge/pipeline_stages-6-FF5A1F?style=flat-square&labelColor=111111)
@@ -84,13 +82,13 @@ Each persona walks the same flow (home → details → OTP → confirmed) in its
 <summary><b>how it works</b></summary>
 <br>
 
-Demucs stem separation → librosa key and tempo → a LAION CLAP embedding → zero-shot vibe tags. The MCP server and the CLI share one engine. Calls are fire-and-forget, so heavy inference never blocks the agent that asked. Without the ML extras installed, it falls back to HPSS and plain feature matrices instead of crashing.
+Demucs stem separation → librosa key and tempo → a LAION CLAP embedding → zero-shot vibe tags. The MCP server and the CLI share one engine. Calls are fire-and-forget, so long inference jobs don't block the calling agent. Without the ML extras installed, it falls back to HPSS and plain feature matrices instead of crashing.
 
 `FastMCP` `PyTorch` `Demucs` `LAION CLAP` `librosa` `Docker`
 </details>
 
 ### Zenic
-**a nutrition and exercise assistant that cites its source or admits it doesn't know.**
+**A nutrition and exercise assistant that cites its sources and says when it doesn't know.**
 
 ![](https://img.shields.io/badge/corpus-10,201_chunks-FF5A1F?style=flat-square&labelColor=111111)
 ![](https://img.shields.io/badge/faithfulness-0.937-FF5A1F?style=flat-square&labelColor=111111)
@@ -108,7 +106,7 @@ Hybrid retrieval over NIH ODS, USDA and ISSN literature. BM25 candidates are add
 </details>
 
 ### SHPSv2
-**predicts how long a bridge has before it needs maintenance, and shows why.**
+**Predicts remaining useful life for bridges from sensor data, with SHAP explanations.**
 
 ![](https://img.shields.io/badge/output-remaining_useful_life-FF5A1F?style=flat-square&labelColor=111111)
 ![](https://img.shields.io/badge/explained_by-SHAP-FF5A1F?style=flat-square&labelColor=111111)
@@ -125,14 +123,14 @@ Sensor readings plus physics-based features feed an XGBoost / Keras model. Every
 
 ---
 
-## bugs that changed how I build
+## problems I hit
 
-| what went wrong | what I do now |
+| problem | fix |
 |:--|:--|
-| the cross-encoder kept pushing short nutrient tables out of the results | inject BM25 candidates before reranking |
-| librosa can report double or half the real tempo | label every number with the engine that produced it |
-| a 90-second agent run doesn't fit in an HTTP request | put it on a job queue and poll |
-| asking an LLM to check an LLM | a deterministic critic made of physics checks |
+| the cross-encoder ranked short nutrient tables below longer text chunks | inject BM25 candidates before reranking |
+| librosa can report double or half the real tempo | every tempo includes the engine that measured it |
+| a 70–95 s pipeline run exceeds HTTP timeouts | async job queue on Supabase |
+| an LLM reviewing another LLM's output | a rule-based critic with four physics checks |
 
 ---
 
@@ -151,7 +149,7 @@ Sensor readings plus physics-based features feed an XGBoost / Keras model. Every
 
 ## also
 
-- **IEEE ICISS 2025**: [AR/VR based Campus Navigation System](https://doi.org/10.1109/ICISS63372.2025.11076255). Lead researcher and developer. Flutter + Mapbox + ARCore + Unity, built on a GPS dataset we surveyed on foot.
+- **IEEE ICISS 2025**: [AR/VR based Campus Navigation System](https://doi.org/10.1109/ICISS63372.2025.11076255). Lead researcher and developer. Flutter + Mapbox + ARCore + Unity, using a GPS dataset we collected by walking the campus.
 - **B.E. Computer Science**, Sathyabama Institute of Science and Technology, 2021–2025.
 
-<p align="center"><sub>heads down on something new. watch the repos.</sub></p>
+<p align="center"><sub>working on something new.</sub></p>
